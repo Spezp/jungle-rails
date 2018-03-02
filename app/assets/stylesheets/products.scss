@@ -8,6 +8,7 @@ main section.categories-show {
     justify-content: space-around;
 
     .product {
+
       // flex:      1;
       max-width: 260px;
       // so that footer within can be positioned absolutely
@@ -40,6 +41,22 @@ main section.categories-show {
         transition: all 0.3s;
       }
 
+      aside.sold-out {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        font-size: 0.8em;
+        background-color: #EB9093FF;
+        border-bottom-right-radius: 10px;
+        border-top-left-radius: 5px;
+        color: white;
+        font-weight: bold;
+
+        p {
+          margin: 0;
+        }
+      }
       aside.price {
         position: absolute;
         top: 0;
