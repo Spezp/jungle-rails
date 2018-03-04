@@ -10,7 +10,6 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
-      puts 'hello'
       puts OrderMailer
       OrderMailer.order_email(order).deliver_now
       redirect_to order, notice: 'Your Order has been placed.'
