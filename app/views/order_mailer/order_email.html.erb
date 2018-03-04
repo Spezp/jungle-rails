@@ -1,0 +1,15 @@
+
+    <p>Thank you for your order! <%= @order.email %></p><br>
+      <% total = 0 %>
+      <% @order.line_items.each do |l| %>
+        <% product = Product.find_by(id: l.product_id)%>
+        <% total += product.price_cents %>
+
+          <p><%= image_tag product.image.tiny %></p><br>
+          <p><%= product.name %></p><br>
+          <p><%= product.description %></p><br>
+          <p><%= product.price_cents / 100 %></p><br>
+          <p><%= product.quantity %></p><br>
+        <% end %>
+      <p>Total: <%= total / 100 %></p>
+
