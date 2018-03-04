@@ -5,7 +5,24 @@
   </header>
 
   <div class="order-summary jumbotron">
-    <h4>Thank you for your order!</h4>
+    <!-- This is a mess and I don't understand how anything works -->
+    <h4>Thank you for your order! <%= @order.email %></h4>
+    <table class="table-bordered">
+      <% total = 0 %>
+      <% @order.line_items.each do |l| %>
+        <% product = Product.find_by(id: l.product_id)%>
+        <% total += product.price_cents %>
+        <tr>
+          <td><%= image_tag product.image.tiny %></td>
+
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= product.price_cents / 100 %></td>
+          <td><%= product.quantity %></td>
+        </tr>
+      <% end %>
+      <p>Total: <%= total / 100 %></p>
+    </table>
   </div>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
