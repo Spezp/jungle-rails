@@ -25,7 +25,40 @@
         </dl>
       </div>
     </div>
+      <div class="row">
+        <% if current_user %>
+          <%= form_for [@product, @review] do |f| %>
 
+            <%= f.text_field :description %>
+            <%= f.select :rating, [['1'],['2'],['3'],['4'],['5']] %>
+            <%= f.submit "Submit" %>
+
+          <% end %>
+        <% end %>
+
+      <div class="row">
+        <table class="table table-bordered">
+          <% @reviews.each do |r| %>
+            <% user = User.find_by(id: r.user_id) %>
+            <% if current_user %>
+              <% email = current_user.email %>
+            <% else %>
+              <% email = false %>
+            <% end %>
+            <tr>
+              <td><%= user.first_name %></td>
+              <td><%= user.last_name %></td>
+              <td><%= r.description %></td>
+              <td><%= r.rating %></td>
+              <td><% if email == user.email %>
+                <%= link_to product_review_path(product_id: r.product_id, id: r.id), class: 'btn btn-xs btn-danger', method: :delete do %>
+                -
+                <% end %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
   </article>
 
 </section>
